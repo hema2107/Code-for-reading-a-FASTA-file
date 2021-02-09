@@ -1,0 +1,15 @@
+from google.colab import drive
+drive.mount('/content/drive')
+pip install phylopandas
+from Bio.Seq import Seq
+import pandas as pd
+from Bio import SeqIO
+with open('/content/drive/MyDrive/Dataset/genomic.fna') as fasta_file:  # Will close handle cleanly
+    identifiers = []
+    lengths = []
+    for seq_record in SeqIO.parse(fasta_file, 'fasta'):  # (generator)
+        identifiers.append(str(seq_record.seq))
+        lengths.append(len(seq_record.seq))
+data= pd.DataFrame(identifiers)
+data['label']=0
+data
